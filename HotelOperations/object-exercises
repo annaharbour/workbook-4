@@ -1,0 +1,33 @@
+Guest ->
+ATTRIBUTES: guestId, guestName, roomNum, checkInDateTime, checkOutDateTime, incidentalsDeposit, creditCard, charges
+METHODS: verifyCard(), addCharge(), removeCharge(), refundDeposit(), checkOut(), checkIn(), makeReservation(),
+makeRequest(), makeOrder()
+KNOWS: guest id, name of guest, room number, date for check in, date for check out, incidentals deposit, credit card
+info, charges list
+DOS: verify credit card, add a charge, remove a charge, refund the incidentals deposit, check in, check out, make
+reservation, make request, make order
+
+StaffMember ->
+ATTRIBUTES: staffId, staffDepartment, hourlyRate, hoursWorkedDateTimes[], managerNotes, workSchedule, responsibilities,
+assignments,
+equipmentUsed
+METHODS: assignStaff(), clockIn(), clockOut(), setSchedule(), getSchedule(), getHoursWorked(), setHoursWorked()
+KNOWS: staff id, what department, hourly rate of pay, hours worked, manager notes, work schedule, responsibilities,
+assignments, equipment used
+DOS:
+
+Room ->
+ATTRIBUTES: roomNum, isOccupied, roomType, nightlyCharge, weeklyCharge, roomIsClean
+METHODS: bookRoom(), setIsOccupied(), setIsRoomClean()
+
+Meal ->
+ATTRIBUTES: orderId, guestId, orderItems, bill, serverId, chefId, reservationDateTime, isRoomService, roomNum
+METHODS: makeReservation(), addToOrder(), deliverMeal(), calculateBill(), addTip(), chargeGuest()
+
+Request ->
+ATTRIBUTES: reqId, reqType, reqNotes, assignedStaff, reqResolved, reqPrice, guestId
+METHODS: makeReq(), resolveReq(), assignStaff()
+
+Notification ->
+ATTRIBUTES: staffMemberId, note
+METHODS: setNote, alertStaffMember()
