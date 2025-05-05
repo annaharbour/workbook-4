@@ -19,6 +19,7 @@ public class Room {
         return numberOfBeds;
     }
 
+
     public float getPrice() {
         return price;
     }
@@ -27,16 +28,16 @@ public class Room {
         return this.isOccupied;
     }
 
-    public void setIsOccupied(){
-        this.isOccupied = !this.isOccupied;
+    public void setIsOccupied(boolean isOccupied){
+        this.isOccupied = isOccupied;
     }
 
     public boolean isDirty() {
         return isDirty;
     }
 
-    public void setIsDirty() {
-        this.isDirty = !this.isDirty;
+    public void setIsDirty(boolean isDirty) {
+        this.isDirty = isDirty;
     }
 
     public boolean isAvailable() {

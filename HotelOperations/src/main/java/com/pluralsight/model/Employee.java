@@ -22,12 +22,12 @@ public class Employee {
         return this.payRate * (float) this.hoursWorked;
     }
 
-    public double setRegularHours(double regularHours) {
-        return this.regularHours = regularHours;
+    public void setRegularHours(double regularHours) {
+        this.regularHours = regularHours;
     }
 
     public double getRegularHours() {
-        return this.hoursWorked < regularHours ? this.hoursWorked : regularHours;
+        return Math.min(this.hoursWorked, this.regularHours);
     }
 
     public double getOverTimeHours() {
