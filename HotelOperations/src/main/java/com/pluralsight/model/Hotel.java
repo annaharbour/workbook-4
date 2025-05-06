@@ -43,37 +43,45 @@ public class Hotel {
         return bookedBasicRooms;
     }
 
-    public int getAvailableSuites(){
+    public int getAvailableRooms() {
+        return this.numberOfRooms - this.bookedBasicRooms;
+    }
+
+    public int getAvailableSuites() {
         return this.numberOfSuites - this.bookedSuites;
     }
 
     public boolean bookRoom(int numberOfRooms, boolean isSuite) {
+        System.out.printf("\nAttempting to book %d %s\n", numberOfRooms, isSuite ? "suites" : "basic rooms");
         if (isSuite) {
             if (numberOfRooms <= this.getAvailableSuites()) {
                 this.bookedSuites += numberOfRooms;
+                System.out.println("Booking complete");
                 return true;
             }
+            System.out.println("Not enough suites remaining");
         } else {
             int availableBasicRooms = this.numberOfRooms - this.bookedBasicRooms;
             if (numberOfRooms <= availableBasicRooms) {
                 this.bookedBasicRooms += numberOfRooms;
+                System.out.println("Booking complete");
                 return true;
             }
+            System.out.println("Transaction failure: not enough basic rooms remaining");
         }
         return false;
     }
 
     @Override
     public String toString() {
-        return "Hotel{" +
-                "name='" + name + '\'' +
-                ", numberOfSuites=" + numberOfSuites +
-                ", numberOfRooms=" + numberOfRooms +
-                ", bookedSuites=" + bookedSuites +
-                ", bookedBasicRooms=" + bookedBasicRooms +
-                '}';
+        return "\n" + name +
+                "\nTotal Suites: " + numberOfSuites +
+                ", Total Rooms: " + numberOfRooms +
+                ", Booked Suites: " + bookedSuites +
+                ", Booked Basic Rooms: " + bookedBasicRooms +
+                ", Available Suites: " + this.getAvailableSuites() +
+                ", Available Rooms: " + this.getAvailableRooms();
     }
-
 
 
 }

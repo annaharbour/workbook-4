@@ -3,7 +3,7 @@ package com.pluralsight.model;
 import java.time.LocalDateTime;
 
 public class Employee {
-    private String employeeId;
+    private final String employeeId;
     private String name;
     private String department;
     private double payRate;
@@ -17,7 +17,6 @@ public class Employee {
         this.department = department;
         this.payRate = payRate;
         this.hoursWorked = hoursWorked;
-        this.regularHours = regularHours;
     }
 
     public double getTotalPay() {
@@ -37,6 +36,10 @@ public class Employee {
     }
 
     public void punchTimeCard(LocalDateTime clockIn, LocalDateTime clockOut) {
+        if(clockIn.isAfter(clockOut)) {
+            System.out.println("Clock in must precede clock out");
+            return;
+        }
         double hours = java.time.Duration.between(clockIn, clockOut).toMinutes() / 60.0;
         this.hoursWorked += hours;
     }

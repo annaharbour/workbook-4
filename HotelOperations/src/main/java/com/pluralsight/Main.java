@@ -5,6 +5,8 @@ import com.pluralsight.model.Hotel;
 import com.pluralsight.model.Reservation;
 import com.pluralsight.model.Room;
 
+import java.time.LocalDateTime;
+
 public class Main {
     public static void main(String[] args) {
         Room room101 = new Room(2, 200.00f, true, true);
@@ -25,12 +27,24 @@ public class Main {
         Employee employee = new Employee("007", "James Bond", "MI6", 20.00f, 45, 40);
         System.out.printf("\nEmployee Total Pay: $%.2f\n", employee.getTotalPay());
         System.out.println(employee);
+        employee.punchTimeCard(LocalDateTime.now(), LocalDateTime.now().plusHours(10));
+        employee.punchTimeCard(LocalDateTime.now(), LocalDateTime.now().plusHours(10));
+        employee.punchTimeCard(LocalDateTime.now(), LocalDateTime.now().plusHours(10));
+        System.out.printf("\nEmployee Total Pay: $%.2f\n", employee.getTotalPay());
+        employee.punchTimeCard(LocalDateTime.now(), LocalDateTime.now().plusHours(10));
+        employee.punchTimeCard(LocalDateTime.now(), LocalDateTime.now().plusHours(10));
+        System.out.printf("\nEmployee Total Pay: $%.2f\n", employee.getTotalPay());
+
 
         //Test Hotel class
-        Hotel hotel = new Hotel(200, 20, "The Carlisle");
-        Hotel motel = new Hotel(300, 5, 50, 0, "Motel 6");
-        System.out.println("Hotel's available suites:" + hotel.getAvailableSuites());
-        System.out.println("Motel's available suites:" + motel.getAvailableSuites());
+        Hotel hotel = new Hotel(20, 5, "The Carlisle");
+        Hotel motel = new Hotel(30, 5, 4, 0, "Motel 6");
+        System.out.println(hotel);
+        System.out.println(motel);
+//        will book rooms
+        hotel.bookRoom(2, false);
+//        will not book rooms because not enough suites
+        motel.bookRoom(6, true);
         System.out.println(hotel);
         System.out.println(motel);
     }
