@@ -15,7 +15,7 @@ public class Hotel {
         this.name = name;
     }
 
-    public Hotel(int bookedBasicRooms, int bookedSuites, int numberOfRooms, int numberOfSuites, String name) {
+    public Hotel(int numberOfRooms, int numberOfSuites, int bookedBasicRooms, int bookedSuites, String name) {
         this.bookedBasicRooms = bookedBasicRooms;
         this.bookedSuites = bookedSuites;
         this.numberOfRooms = numberOfRooms;
@@ -62,5 +62,18 @@ public class Hotel {
         }
         return false;
     }
+
+    @Override
+    public String toString() {
+        return "Hotel{" +
+                "name='" + name + '\'' +
+                ", numberOfSuites=" + numberOfSuites +
+                ", numberOfRooms=" + numberOfRooms +
+                ", bookedSuites=" + bookedSuites +
+                ", bookedBasicRooms=" + bookedBasicRooms +
+                '}';
+    }
+
+
 
 }

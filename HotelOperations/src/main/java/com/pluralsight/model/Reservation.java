@@ -6,8 +6,8 @@ public class Reservation {
     private int numberOfNights = 0;
     private boolean isWeekend = false;
 
-    public Reservation(RoomType roomType, int numberOfNights, float price, boolean isWeekend) {
-        this.roomType = roomType;
+    public Reservation(String roomType, int numberOfNights, float price, boolean isWeekend) {
+        this.roomType = RoomType.valueOf(roomType.toUpperCase());
         this.numberOfNights = numberOfNights;
         this.isWeekend = isWeekend;
     }
