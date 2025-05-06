@@ -17,10 +17,12 @@ public class Main {
         System.out.println(room103.isAvailable());
         Room room104 = new Room(2, 200.00f, true, false);
         System.out.println(room104.isAvailable());
+        room104.checkIn();
+        room104.checkOut();
+        room104.checkIn();
 
         // Test Reservation class
-        Reservation reservation = new Reservation("king", 3, 139.00f, true);
-        System.out.printf("\nReservation Room Type: %s", reservation.getRoomType());
+        Reservation reservation = new Reservation("king", 3, true);
         System.out.printf("\nReservation Total: $%.2f", reservation.getReservationTotal());
 
         // Test Employee class
