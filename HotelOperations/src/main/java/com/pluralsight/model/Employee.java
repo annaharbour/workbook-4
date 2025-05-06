@@ -10,13 +10,13 @@ public class Employee {
     private double hoursWorked;
     private double regularHours;
 
-    public Employee(String employeeId, String name, String department, float payRate, double hoursWorked,
-                    double regularHours) {
+    public Employee(String employeeId, String name, String department, float payRate, double hoursWorked) {
         this.employeeId = employeeId;
         this.name = name;
         this.department = department;
         this.payRate = payRate;
         this.hoursWorked = hoursWorked;
+        this.regularHours = 40;
     }
 
     public double getTotalPay() {
