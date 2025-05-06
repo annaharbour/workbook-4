@@ -42,6 +42,10 @@ public class Room {
     }
 
     public void checkIn() {
+        if(!isAvailable()){
+            System.out.println("Cannot check in, room occupied");
+            return;
+        }
         this.isOccupied = true;
         this.isDirty = true;
     }
