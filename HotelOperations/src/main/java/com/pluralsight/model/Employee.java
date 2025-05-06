@@ -1,5 +1,8 @@
 package com.pluralsight.model;
 
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+
 public class Employee {
     private String employeeId;
     private String name;
@@ -32,5 +35,22 @@ public class Employee {
 
     public double getOverTimeHours() {
         return this.hoursWorked > regularHours ? this.hoursWorked - regularHours : 0;
+    }
+
+    public void punchTimeCard(LocalDateTime clockIn, LocalDateTime clockOut){
+        double hours = java.time.Duration.between(clockIn, clockOut).toMinutes() / 60.0;
+        this.hoursWorked += hours;
+    }
+
+    @Override
+    public String toString() {
+        return "Employee{" +
+                "employeeId='" + employeeId + '\'' +
+                ", name='" + name + '\'' +
+                ", department='" + department + '\'' +
+                ", payRate=" + payRate +
+                ", hoursWorked=" + hoursWorked +
+                ", regularHours=" + regularHours +
+                '}';
     }
 }
