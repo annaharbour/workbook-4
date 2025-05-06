@@ -20,6 +20,7 @@ public class Reservation {
         this.roomType = RoomType.valueOf(roomType.toUpperCase());
     }
 
+
     public float getPrice() {
         float price = 0.00f;
         if (this.roomType == RoomType.KING) {

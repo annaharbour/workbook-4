@@ -5,14 +5,12 @@ public class Room {
     private float price;
     private boolean isOccupied;
     private boolean isDirty;
-    private boolean isAvailable;
 
-    public Room(int numberOfBeds, float price, boolean isOccupied, boolean isDirty, boolean isAvailable) {
+    public Room(int numberOfBeds, float price, boolean isOccupied, boolean isDirty) {
         this.numberOfBeds = numberOfBeds;
         this.price = price;
         this.isOccupied = isOccupied;
         this.isDirty = isDirty;
-        this.isAvailable = isAvailable;
     }
 
     public int getNumberOfBeds() {
@@ -49,8 +47,6 @@ public class Room {
     }
 
     public void checkOut() {
-//When a guest checks out of a room it must first be cleaned by a housekeeper
-//before another guest can check into the room.
         this.isOccupied = false;
         cleanroom();
     }

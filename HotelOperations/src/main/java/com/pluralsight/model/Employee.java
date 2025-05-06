@@ -1,13 +1,12 @@
 package com.pluralsight.model;
 
 import java.time.LocalDateTime;
-import java.time.LocalTime;
 
 public class Employee {
     private String employeeId;
     private String name;
     private String department;
-    private float payRate;
+    private double payRate;
     private double hoursWorked;
     private double regularHours;
 
@@ -21,8 +20,8 @@ public class Employee {
         this.regularHours = regularHours;
     }
 
-    public float getTotalPay() {
-        return this.payRate * (float) this.hoursWorked;
+    public double getTotalPay() {
+        return (this.payRate * this.regularHours) + (this.payRate * 1.5 * this.getOverTimeHours());
     }
 
     public void setRegularHours(double regularHours) {
@@ -37,7 +36,7 @@ public class Employee {
         return this.hoursWorked > regularHours ? this.hoursWorked - regularHours : 0;
     }
 
-    public void punchTimeCard(LocalDateTime clockIn, LocalDateTime clockOut){
+    public void punchTimeCard(LocalDateTime clockIn, LocalDateTime clockOut) {
         double hours = java.time.Duration.between(clockIn, clockOut).toMinutes() / 60.0;
         this.hoursWorked += hours;
     }
