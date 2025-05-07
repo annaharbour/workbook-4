@@ -26,7 +26,7 @@ public class Main {
         System.out.printf("\nReservation Total: $%.2f", reservation.getReservationTotal());
 
         // Test Employee class
-        Employee employee = new Employee("007", "James Bond", "MI6", 20.00f, 45);
+        Employee employee = new Employee("007", "James Bond", "MI6", 20.00f);
         System.out.printf("\nEmployee Total Pay: $%.2f\n", employee.getTotalPay());
         System.out.println(employee);
         employee.punchTimeCard(LocalDateTime.now(), LocalDateTime.now().plusHours(10));

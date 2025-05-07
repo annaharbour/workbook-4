@@ -17,21 +17,31 @@ public class Room {
         return !this.isDirty && !this.isOccupied;
     }
 
-    public void checkIn() {
-        if(!isAvailable()){
+    public boolean checkIn() {
+        if (!this.isAvailable()) {
             System.out.println("Cannot check in, room occupied");
-            return;
+            return false;
         }
         this.isOccupied = true;
         this.isDirty = true;
+        return true;
     }
 
-    public void checkOut() {
+    public boolean checkOut() {
+        if (!this.isOccupied) {
+            return false;
+        }
         this.isOccupied = false;
         cleanroom();
+        return true;
     }
 
-    public void cleanroom(){
+    public boolean cleanroom() {
+        if (!this.isDirty) {
+            return false;
+        }
         this.isDirty = false;
+        return true;
+
     }
 }

@@ -8,23 +8,17 @@ public class Employee {
     private String department;
     private double payRate;
     private double hoursWorked;
-    private double regularHours;
+    private static double regularHours = 40;
 
-    public Employee(String employeeId, String name, String department, float payRate, double hoursWorked) {
+    public Employee(String employeeId, String name, String department, float payRate) {
         this.employeeId = employeeId;
         this.name = name;
         this.department = department;
         this.payRate = payRate;
-        this.hoursWorked = hoursWorked;
-        this.regularHours = 40;
     }
 
     public double getTotalPay() {
-        return (this.payRate * this.regularHours) + (this.payRate * 1.5 * this.getOverTimeHours());
-    }
-
-    public void setRegularHours(double regularHours) {
-        this.regularHours = regularHours;
+        return (this.payRate * this.getRegularHours()) + (this.payRate * 1.5 * this.getOverTimeHours());
     }
 
     public double getRegularHours() {
@@ -36,9 +30,8 @@ public class Employee {
     }
 
     public void punchTimeCard(LocalDateTime clockIn, LocalDateTime clockOut) {
-        if(clockIn.isAfter(clockOut)) {
-            System.out.println("Clock in must precede clock out");
-            return;
+        if (clockIn.isAfter(clockOut)) {
+            throw new IllegalArgumentException("Clock in must precede clock out");
         }
         double hours = java.time.Duration.between(clockIn, clockOut).toMinutes() / 60.0;
         this.hoursWorked += hours;
