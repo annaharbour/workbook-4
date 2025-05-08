@@ -33,7 +33,8 @@ class EmployeeTest {
         } catch (IllegalArgumentException e){
             System.out.println("Exception expected and ignored: " + e.getMessage());
         }
-        employee.punchTimeCard(LocalDateTime.now(), LocalDateTime.now().plusDays(1));
+        assertEquals(24, employee.punchTimeCard(LocalDateTime.now(), LocalDateTime.now().plusDays(1)));
+
     }
 
 }
