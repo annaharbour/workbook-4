@@ -15,11 +15,6 @@ public class Hand {
         cards.add(card);
     }
 
-    public void dealBustingAce() {
-        Card ace = new Card("", "1");
-        cards.add(ace);
-    }
-
     public int getSize() {
         return cards.size();
     }

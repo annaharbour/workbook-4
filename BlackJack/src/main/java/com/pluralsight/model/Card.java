@@ -1,5 +1,7 @@
 package com.pluralsight.model;
 
+import java.util.Scanner;
+
 public class Card {
     private String suit;
     private String value;
@@ -35,13 +37,18 @@ public class Card {
 
     public int getPointValue() {
         int pointValue = 0;
-        if (this.isFaceUp) {
-            pointValue = switch (this.value) {
-                case "A" -> 11;
-                case "K", "Q", "J" -> 10;
-                default -> Integer.parseInt(this.value);
-            };
-        }
+        switch (this.getValue()) {
+            case "A":
+                pointValue = 11;
+                break;
+            case "K", "Q", "J":
+                pointValue = 10;
+                break;
+            default:
+                pointValue = Integer.parseInt(this.value);
+                break;
+        };
+
         return pointValue;
     }
 

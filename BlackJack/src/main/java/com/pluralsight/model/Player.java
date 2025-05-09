@@ -25,10 +25,8 @@ public class Player {
 
     public void hit(Deck deck) {
         Card card = deck.deal();
-        if (card != null && card.getValue().equals("A") && this.getHandValue() + 11 >= 21) {
-            hand.dealBustingAce();
-        };
         hand.deal(card);
+
     }
 
     public void stay() {

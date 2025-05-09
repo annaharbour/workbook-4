@@ -9,32 +9,28 @@ import java.util.Scanner;
 public class BlackJackApp {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
+//      initialize a new deck and shuffle it
         Deck deck = new Deck();
         deck.shuffle();
+//      get number of players and player names
         ArrayList<Player> players = getPlayers(scanner);
-        playGame(players, deck, scanner);
-    }
-
-    private static void playGame(ArrayList<Player> players, Deck deck, Scanner scanner) {
-        int closestTo21 = 0;
-        Player closestPlayer = null;
-
         for (Player player : players) {
             System.out.println(player.getName() + "'s turn:");
             for (int i = 0; i < 2; i++) {
                 player.hit(deck);
             }
             int handValue = player.getHandValue();
-            System.out.println(player.getName() + "'s hand is worth " + handValue);
-
-            if (handValue <= 21 && handValue > closestTo21) {
-                closestTo21 = handValue;
-                closestPlayer = player;
-            }
+            System.out.println(player.getName() + "'s initial hand is worth " + handValue);
         }
+        //      play game
+        playGame(players, deck, scanner);
+    }
+
+    private static void playGame(ArrayList<Player> players, Deck deck, Scanner scanner) {
+        Player closestPlayer = null;
+        int closestTo21 = 0;
 
         while (deck.getSize() > 0 && players.size() > 1) {
-            ArrayList<Player> playersToRemove = new ArrayList<>();
             for (Player player : players) {
                 System.out.println(player.getName() + ": hit or stay?");
                 String choice = scanner.nextLine().toLowerCase();
@@ -44,17 +40,22 @@ public class BlackJackApp {
                     System.out.println(player.getName() + "'s hand is now worth " + handValue);
                     if (handValue > 21) {
                         System.out.println(player.getName() + " has busted!");
-                        playersToRemove.add(player);
+                        players.remove(player);
                         break;
+                    } else {
+                        if (handValue > closestTo21) {
+                            closestTo21 = handValue;
+                            closestPlayer = player;
+                        }
                     }
                 } else if (choice.equals("stay")) {
                     player.stay();
-                    continue;
                 } else {
                     System.out.println("Please enter 'hit' or 'stay'.");
                 }
+                int handValue = player.getHandValue();
+                System.out.println(player.getName() + "'s hand is worth " + handValue);
             }
-            players.removeAll(playersToRemove);
         }
 
         System.out.println(closestPlayer.getName() + " is the winner with: " + closestTo21 + " points");
