@@ -1,9 +1,7 @@
 package com.pluralsight;
 
 public class NameFormatter {
-    private NameFormatter() {
 
-    }
 
     public static String format(String firstName, String lastName) {
         StringBuilder formatted = new StringBuilder();
@@ -13,45 +11,79 @@ public class NameFormatter {
 
     public static String format(String prefix, String firstName, String middleName, String lastName, String suffix) {
         StringBuilder formatted = new StringBuilder();
-//TODO: replace ,'s
-        formatted.append(lastName).append(", ").append(prefix).append(" ").append(firstName).append(middleName).append(
-                ", ").append(suffix);
+
+
+        if(!lastName.isEmpty()){
+            formatted.append(lastName).append(", ");
+        }
+        if (!prefix.isEmpty()) {
+            formatted.append(prefix).append(" ");
+        }
+        if (!firstName.isEmpty()) {
+            formatted.append(firstName).append(" ");
+        }
+        if (!middleName.isEmpty()) {
+            formatted.append(middleName);
+        }
+        if (!suffix.isEmpty()) {
+            formatted.append(", ").append(suffix);
+        }
+
         return formatted.toString();
     }
 
     public static String format(String fullName) {
         String[] names = fullName.split(" ");
-        String first = "";
+        String firstName = "";
         String middleName = "";
         String lastName = "";
         String suffix = "";
+        String prefix = "";
+        StringBuilder formattedName = new StringBuilder();
 
-        switch(fullName.length()){
+        switch (names.length) {
             case 1:
+                firstName = names[0];
+                formattedName.append(firstName);
                 break;
             case 2:
+                firstName = names[0];
+                lastName = names[1];
+                formattedName.append(lastName).append(", ").append(firstName);
                 break;
             case 3:
+                firstName = names[0];
+                middleName = names[1];
+                lastName = names[2];
+                formattedName.append(lastName).append(" ").append(firstName).append(" ").append(middleName);
                 break;
             case 4:
+                firstName = names[0];
+                middleName = names[1];
+                lastName = names[2];
+                suffix = names[3];
+                formattedName.append(lastName).append(" ").append(firstName).append(" ").append(middleName).append(
+                        ", ").append(suffix);
                 break;
             case 5:
-
+                prefix = names[0];
+                firstName = names[1];
+                middleName = names[2];
+                lastName = names[3];
+                suffix = names[4];
+                formattedName.append(lastName).append(" ").append(prefix).append(" ").append(firstName).append(
+                        " ").append(middleName).append(", ").append(suffix);
                 break;
             default:
                 break;
         }
-
-        StringBuilder formattedName = new StringBuilder();
-//        TOD: append
         String result = formattedName.toString();
-        System.out.println(result);
         //You should assume that an incoming fullName will always come formatted in this order:
         //Prefix FirstName MiddleName LastName, Suffix
         //Dr. Mel B Johnson, PhD
         //Mel B Johnson, PhD
         //Mel Johnson
-        return "";
+        return result;
     }
 }
 

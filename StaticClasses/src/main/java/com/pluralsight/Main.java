@@ -13,5 +13,11 @@ public class Main {
 //Johnson, Mel
     public static void main(String[] args) {
         System.out.println("Hello, World!");
+        System.out.println("Dr. Mel B Johnson, Phd -> \t" + NameFormatter.format("Dr. Mel B Johnson, Phd"));
+        System.out.println("Mel Johnson -> \t" + NameFormatter.format("Mel Johnson"));
+        System.out.println("Mel B Johnson, PhD -> \t" + NameFormatter.format("Mel B Johnson, PhD"));
+        System.out.println("\"Mel\", \"Johnson\" -> \t" + NameFormatter.format("Mel", "Johnson"));
+        System.out.println("\"Dr\", \"Mel\", \"B\", \"Johnson\", \"Phd\" -> \t" + NameFormatter.format("Dr", "Mel", "B",
+                "Johnson", "Phd"));
     }
 }
