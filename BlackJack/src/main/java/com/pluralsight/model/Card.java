@@ -18,7 +18,7 @@ public class Card {
     }
 
     public String getValue() {
-        if (this.isFaceUp) {
+        if (isFaceUp()) {
             // this is the string value of the card
             // i.e. A, K, Q, J, 10, 9 ...
             return value;
@@ -28,7 +28,7 @@ public class Card {
     }
 
     public String getSuit() {
-        if (this.isFaceUp) {
+        if (isFaceUp()) {
             return suit;
         } else {
             return "#";
@@ -39,7 +39,6 @@ public class Card {
         int pointValue = 0;
         switch (this.getValue()) {
             case "A":
-                pointValue = 11;
                 break;
             case "K", "Q", "J":
                 pointValue = 10;

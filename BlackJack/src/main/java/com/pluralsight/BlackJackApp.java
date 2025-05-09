@@ -1,6 +1,7 @@
 package com.pluralsight;
 
 import com.pluralsight.model.Deck;
+import com.pluralsight.model.Game;
 import com.pluralsight.model.Player;
 
 import java.util.ArrayList;
@@ -9,56 +10,27 @@ import java.util.Scanner;
 public class BlackJackApp {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-//      initialize a new deck and shuffle it
+        ArrayList<Player> players = getPlayers(scanner);
         Deck deck = new Deck();
         deck.shuffle();
-//      get number of players and player names
-        ArrayList<Player> players = getPlayers(scanner);
-        for (Player player : players) {
-            System.out.println(player.getName() + "'s turn:");
-            for (int i = 0; i < 2; i++) {
-                player.hit(deck);
-            }
-            int handValue = player.getHandValue();
-            System.out.println(player.getName() + "'s initial hand is worth " + handValue);
-        }
-        //      play game
-        playGame(players, deck, scanner);
-    }
+        Game game = new Game(players, deck);
+        game.startGame();
 
-    private static void playGame(ArrayList<Player> players, Deck deck, Scanner scanner) {
-        Player closestPlayer = null;
-        int closestTo21 = 0;
-
-        while (deck.getSize() > 0 && players.size() > 1) {
-            for (Player player : players) {
-                System.out.println(player.getName() + ": hit or stay?");
+        while (game.getActivePlayers().size() > 1 && deck.getSize() > 0) {
+            for (Player player : game.getActivePlayers()) {
+                System.out.println(player.getName() + ": Hit or Stay?");
                 String choice = scanner.nextLine().toLowerCase();
-                if (choice.equals("hit")) {
-                    player.hit(deck);
-                    int handValue = player.getHandValue();
-                    System.out.println(player.getName() + "'s hand is now worth " + handValue);
-                    if (handValue > 21) {
-                        System.out.println(player.getName() + " has busted!");
-                        players.remove(player);
+                game.playRound(player, choice);
+
+                if (player.isBusted()) {
+                    System.out.println(player.getName() + " has busted!");
+                    if(game.getActivePlayers().size() == 1){
                         break;
-                    } else {
-                        if (handValue > closestTo21) {
-                            closestTo21 = handValue;
-                            closestPlayer = player;
-                        }
                     }
-                } else if (choice.equals("stay")) {
-                    player.stay();
-                } else {
-                    System.out.println("Please enter 'hit' or 'stay'.");
                 }
-                int handValue = player.getHandValue();
-                System.out.println(player.getName() + "'s hand is worth " + handValue);
             }
         }
-
-        System.out.println(closestPlayer.getName() + " is the winner with: " + closestTo21 + " points");
+        game.declareWinner();
     }
 
     private static ArrayList getPlayers(Scanner scanner) {
